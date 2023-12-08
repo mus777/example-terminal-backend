@@ -9,7 +9,7 @@ require 'sinatra/cross_origin'
 # This enables the requires CORS headers to allow the browser to make the requests from the JS Example App.
 configure do
   enable :cross_origin
-end
+end 
 
 before do
   response.headers['Access-Control-Allow-Origin'] = '*'
@@ -290,28 +290,28 @@ end
 # Locations, you'll likely want to implement pagination in your application so that
 # you can efficiently fetch Locations as needed.
 # https://stripe.com/docs/api/terminal/locations
-get '/list_locations' do
-  validationError = validateApiKey
-  if !validationError.nil?
-    status 400
-    return log_info(validationError)
-  end
+#get '/list_locations' do
+ # validationError = validateApiKey
+ # if !validationError.nil?
+ #   status 400
+#    return log_info(validationError)
+#  end
 
-  begin
-    locations = Stripe::Terminal::Location.list(
-      limit: 100
-    )
-  rescue Stripe::StripeError => e
-    status 402
-    return log_info("Error fetching Locations! #{e.message}")
-  end
+ # begin
+ #   locations = Stripe::Terminal::Location.list(
+ #     limit: 100
+ #   )
+#  rescue Stripe::StripeError => e
+#    status 402
+ #   return log_info("Error fetching Locations! #{e.message}")
+#  end
 
-  log_info("#{locations.data.size} Locations successfully fetched")
+ # log_info("#{locations.data.size} Locations successfully fetched")
 
-  status 200
-  content_type :json
-  return locations.data.to_json
-end
+ # status 200
+ # content_type :json
+#  return locations.data.to_json
+#end
 
 # This endpoint creates a Location.
 # https://stripe.com/docs/api/terminal/locations
